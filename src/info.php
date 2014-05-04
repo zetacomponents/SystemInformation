@@ -300,6 +300,16 @@ class ezcSystemInfo
                     phpversion( 'XCache' )                  // version string
                 );
         }
+        if ( ezcBaseFeatures::hasExtensionSupport( "Zend OPcache" ) )
+        {
+            $phpAcceleratorInfo = new ezcSystemInfoAccelerator(
+                    "Zend OPcache",                         // name
+                    "http://www.php.net/opcache",           // url
+                    ( ini_get( 'opcache.enable' ) != 0 ),   // isEnabled
+                    false,                                  // version int
+                    phpversion( 'Zend OPcache' )            // version string
+                );
+        }
 
         return $phpAcceleratorInfo;
     }
