@@ -1,4 +1,4 @@
-1.1.0 - Friday 12 September 2014
+1.1 - Saturday 27 September 2014
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - Fixed: Adjusted source headers of SystemInformation to Apache license.
@@ -6,6 +6,7 @@
 - Remove custom test runner.
 - Added composer.json
 - Add Zend OPcache support in SystemInformation
+
 
 1.0.8 - Tuesday 01 September 2009
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
