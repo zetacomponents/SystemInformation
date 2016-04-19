@@ -165,6 +165,11 @@ class ezcSystemInfoMacReader extends ezcSystemInfoReader
         
         $hwInfo = shell_exec( "system_profiler -xml -detailLevel mini SPHardwareDataType" );
 
+        // Abort if sysinfo XML is blank
+        if($hwInfo == ''){
+                return true;
+        }
+
         $reader = new XMLReader();
         $reader->XML( $hwInfo );
 
