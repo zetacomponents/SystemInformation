@@ -163,7 +163,7 @@ class ezcSystemInfoMacReader extends ezcSystemInfoReader
                                      "physical_memory" );
         $allValuesDetected = false;
         
-        $hwInfo = shell_exec( "system_profiler -xml -detailLevel mini SPHardwareDataType" );
+        $hwInfo = shell_exec( "/usr/sbin/system_profiler -xml -detailLevel mini SPHardwareDataType" );
 
         $reader = new XMLReader();
         $reader->XML( $hwInfo );
