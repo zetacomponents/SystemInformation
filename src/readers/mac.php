@@ -170,6 +170,11 @@ class ezcSystemInfoMacReader extends ezcSystemInfoReader
             return false;
         }
 
+        // Abort if sysinfo XML is blank
+        if($hwInfo == ''){
+                return true;
+        }
+
         $reader = new XMLReader();
         $reader->XML( $hwInfo );
 
