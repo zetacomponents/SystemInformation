@@ -169,7 +169,13 @@ class ezcSystemInfo
      */
     private function init()
     {
-        $this->setSystemInfoReader();
+        try {
+            $this->setSystemInfoReader();
+        }
+        catch( ezcSystemInfoReaderCantScanOSException $e )
+        {
+            $this->systemInfoReader = null;
+        }
     }
 
     /**
@@ -179,64 +185,59 @@ class ezcSystemInfo
      * Returns true if it was able to set appropriate systemInfoReader
      * or false if failed.
      *
+     * @throws ezcSystemInfoReaderCantScanOSException
+     *         If system variables can't be received from OS.
      * @return bool
      */
     private function setSystemInfoReader()
     {
-        try {
-            // Determine OS
-            $uname = php_uname( 's' );
+        // Determine OS
+        $uname = php_uname( 's' );
 
-            if ( substr( $uname, 0, 7 ) == 'Windows' )
+        if ( substr( $uname, 0, 7 ) == 'Windows' )
+        {
+            $this->osType = 'win32';
+            $this->osName = 'Windows';
+            $this->fileSystemType = 'win32';
+            $this->lineSeparator= "\r\n";
+            $this->backupFileName = '.bak';
+            $this->systemInfoReader = new ezcSystemInfoWindowsReader( $uname );
+        }
+        else if ( substr( $uname, 0, 6 ) == 'Darwin' )
+        {
+            $this->osType = 'mac';
+            $this->osName = 'Mac OS X';
+            $this->fileSystemType = 'unix';
+            $this->lineSeparator= "\n";
+            $this->backupFileName = '~';
+            $this->systemInfoReader = new ezcSystemInfoMacReader();
+        }
+        else
+        {
+            $this->osType = 'unix';
+            if ( strtolower( $uname ) == 'linux' )
             {
-                $this->osType = 'win32';
-                $this->osName = 'Windows';
-                $this->fileSystemType = 'win32';
-                $this->lineSeparator= "\r\n";
-                $this->backupFileName = '.bak';
-                $this->systemInfoReader = new ezcSystemInfoWindowsReader( $uname );
-            }
-            else if ( substr( $uname, 0, 6 ) == 'Darwin' )
-            {
-                $this->osType = 'mac';
-                $this->osName = 'Mac OS X';
+                $this->osName = 'Linux';
                 $this->fileSystemType = 'unix';
                 $this->lineSeparator= "\n";
                 $this->backupFileName = '~';
-                $this->systemInfoReader = new ezcSystemInfoMacReader();
+                $this->systemInfoReader = new ezcSystemInfoLinuxReader();
+            }
+            else if ( strtolower( substr( $uname, 0, 7 ) ) == 'freebsd' )
+            {
+                $this->osName = 'FreeBSD';
+                $this->fileSystemType = 'unix';
+                $this->lineSeparator= "\n";
+                $this->backupFileName = '~';
+                $this->systemInfoReader = new ezcSystemInfoFreeBsdReader();
             }
             else
             {
-                $this->osType = 'unix';
-                if ( strtolower( $uname ) == 'linux' )
-                {
-                    $this->osName = 'Linux';
-                    $this->fileSystemType = 'unix';
-                    $this->lineSeparator= "\n";
-                    $this->backupFileName = '~';
-                    $this->systemInfoReader = new ezcSystemInfoLinuxReader();
-                }
-                else if ( strtolower( substr( $uname, 0, 7 ) ) == 'freebsd' )
-                {
-                    $this->osName = 'FreeBSD';
-                    $this->fileSystemType = 'unix';
-                    $this->lineSeparator= "\n";
-                    $this->backupFileName = '~';
-                    $this->systemInfoReader = new ezcSystemInfoFreeBsdReader();
-                }
-                else
-                {
-                    $this->systemInfoReader = null;
-                    return false;
-                }
+                $this->systemInfoReader = null;
+                return false;
             }
-            return true;
         }
-        catch( ezcSystemInfoReaderCantScanOSException $e )
-        {
-            $this->systemInfoReader = null;
-            return false;
-        }
+        return true;
     }
 
     /**
