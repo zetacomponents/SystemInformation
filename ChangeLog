@@ -1,3 +1,12 @@
+1.1.1 - Sunday 23 September 2017
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- Fixed #7: Prevent XML reader error when `shell_exec` returns nothing (Goulven
+  Champenois @goulvench)
+- Fixed #9: Impossible to create ezcSystemInfo object when only uname is
+  available (Sebastian Blank @blankse).
+
+
 1.1 - Saturday 27 September 2014
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
