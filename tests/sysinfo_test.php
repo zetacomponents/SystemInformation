@@ -249,6 +249,17 @@ class ezcSystemInfoTest extends ezcTestCase
             );
             self::assertEquals( $accelerator, $testSample, 'PHP Accelerator not determined correctly' );
         }
+        else if ( ezcBaseFeatures::hasExtensionSupport( "Zend OPcache" ) )
+        {
+            $testSample = new ezcSystemInfoAccelerator(
+                    "Zend OPcache",                // name
+                    "http://www.php.net/opcache",  // url
+                    true,                          // isEnabled
+                    false,                         // version int
+                    phpversion()                   // version string
+            );
+            self::assertEquals( $accelerator, $testSample, 'PHP Accelerator not determined correctly' );
+        }
         else
         {
             self::assertEquals( $accelerator, null, 'phpAccelerator() should return null' );
@@ -272,7 +283,7 @@ class ezcSystemInfoTest extends ezcTestCase
 
     public static function suite()
     {
-        return new PHPUnit_Framework_TestSuite( "ezcSystemInfoTest" );
+        return new \PHPUnit\Framework\TestSuite( "ezcSystemInfoTest" );
     }
 }
 ?>
