@@ -1,3 +1,10 @@
+1.1.2 - [RELEASEDATE]
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- Fixed #10: Handle nulls when some CPU infos aren't available. (Adrien Dupuis
+  @adriendupuis)
+
+
 1.1.1 - Sunday 23 September 2017
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

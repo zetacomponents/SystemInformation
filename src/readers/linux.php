@@ -253,6 +253,9 @@ class ezcSystemInfoLinuxReader extends ezcSystemInfoReader
      */
     public function cpuSpeed()
     {
+        if ( $this->cpuSpeed === null ) {
+            return null;
+        }
         $totalSpeed = 0;
         foreach ( $this->cpuSpeed as $speed )
         {
@@ -270,7 +273,7 @@ class ezcSystemInfoLinuxReader extends ezcSystemInfoReader
      */
     public function cpuType()
     {
-        return $this->cpuType[0];
+        return $this->cpuType[0] ?? null;
     }
 
     /**
