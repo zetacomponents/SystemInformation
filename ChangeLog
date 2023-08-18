@@ -1,4 +1,4 @@
-1.1.2 - [RELEASEDATE]
+1.1.2 - Friday 18 August 2023
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - Fixed #10: Handle nulls when some CPU infos aren't available. (Adrien Dupuis
